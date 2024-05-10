@@ -1,0 +1,16 @@
+<form class="mx-5 p-5" action="/update/{{postId}}" method="POST">
+    <div class="text-center">
+        <h1><span class="border border-dark p-3 fw-bold">Update Post</span></h1>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Title</label>
+        <textarea name="title" class="form-control" required>{{title}}</textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Post</label>
+        <textarea name="text" class="form-control" rows="3" required>{{text}}</textarea>
+    </div>
+    <div class="d-grid gap-2 col-6 mx-auto">
+        <button type="submit" class="btn btn-primary">Update Post</button>
+    </div>
+</form>
