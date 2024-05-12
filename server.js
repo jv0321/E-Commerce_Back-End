@@ -1,34 +1,18 @@
 const express = require('express');
-const { engine } = require('express-handlebars');
-require('dotenv').config();
+const routes = require('./routes');
+const sequelize = require('./config/connection');
+// import sequelize connection
+
 const app = express();
-const PORT = process.env.PORT || 3333;
-const client = require('./db/client');
-const session = require('express-session');
-// const SequelizeStore = require('connect-session-sequelize')(session.Store); // Import SequelizeStore
-const post_routes = require('./routes/post-routes');
-const view_routes = require('./routes/view-routes');
+const PORT = process.env.PORT || 3001;
 
-app.use(express.urlencoded({extended: false}));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.engine('.hbs', engine({
-    extname: '.hbs'
-}));
-app.set('view engine', '.hbs');
+app.use(routes);
 
-// Setup sessions
-app.use(session({
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    store: new SequelizeStore({
-      db: client,
-    }),
-}));
-
-app.use('/', [post_routes, view_routes]);
-
-client.sync({ force:false })
-    .then(() => {
-        app.listen(PORT, () => console.log('Server started on port', PORT))
-    });
+// sync sequelize models to the database, then turn on the server
+sequelize.sync({ force: false }).then(() => {
+    app.listen(PORT, () => console.log('Now listening'));
+  });
+  

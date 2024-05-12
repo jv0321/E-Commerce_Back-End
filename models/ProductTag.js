@@ -1,54 +1,42 @@
-const { DataTypes, Model } = require('sequelize');
-const client = require('../db/client')
-const { hash, compare } = require('bcrypt')
+const { Model, DataTypes, INTEGER } = require('sequelize');
 
-class User extends Model {
-  async validatePass(formPassword) {
-    const is_valid = await compare(formPassword, this.password)
+const sequelize = require('../config/connection');
+const Product = require('./Product');
+const Tag = require('./Tag');
 
-    return is_valid
-  }
+class ProductTag extends Model {}
 
-  toJSON() {
-    const user = Object.assign({}, this.get())
-
-    delete user.password
-
-    return user
-  }
-}
-
-User.init(
+ProductTag.init(
   {
-    user_id: {
+    // define columns
+    id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
     },
-    username: {
-      type: DataTypes.STRING,
-      unique: true,
-      allowNull: false
+    product_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: Product,
+        key: 'product_id'
+      }
     },
-    password: {
-      type: DataTypes.STRING,
-    //   validate: {
-    //     len: 6
-    //   },
-      allowNull: false
+    tag_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: Tag,
+        key: 'tag_id'
+      }
     }
   },
   {
-    sequelize: client,
-    modelName: 'user',
-    hooks: {
-      async beforeCreate(user) {
-        user.password = await hash(user.password, 10)
-      }
-    },
-    timestamps: false
+    sequelize,
+    timestamps: false,
+    freezeTableName: true,
+    underscored: true,
+    modelName: 'product_tag',
   }
-)
+);
 
-module.exports = User
+module.exports = ProductTag;
