@@ -1,32 +1,82 @@
 # E-Commerce Backend
-GitHub License Contributor Covenant
 
-# Overview
-This application serves as a straightforward E-Commerce database tool, enabling users to interact with products, categories, and tags through viewing, adding, updating, and deleting functionalities. These actions are facilitated via HTTP routes and JSON data within the Insomnia application. Essential requirements for utilizing this application include Node.js, PostgreSQL, Insomnia, and additional dependencies.
+A straightforward backend application for managing an e-commerce database. This project allows users to interact with products, categories, and tags by using HTTP routes and JSON data through Insomnia. The application is built with Node.js, PostgreSQL, and additional dependencies to facilitate seamless database management.
 
-# Table of Contents
+---
 
-Usage
-Credits
-License
-How to Contribute
-Tests
-Questions
+## Table of Contents
 
-# Usage
-To utilize this application, users must first ensure that Node.js, PostgreSQL, and Insomnia are installed on their system. Upon cloning the repository, users need to execute "npm i" to install necessary dependencies. Subsequently, users must input their PostgreSQL credentials in a .env file, and then access PostgreSQL in their terminal to execute "\i ./db/schema.sql" before exiting. Users should then proceed with "npm run seed" followed by "npm run dev". Afterwards, using Insomnia, users can launch the application and construct HTTP requests, utilizing provided images as reference, to commence managing their products. Adding and updating functionality requires sending requests with JSON by selecting the "Body" tab and choosing "JSON" from the dropdown menu.
+- [Overview](#overview)
+- [Usage](#usage)
+- [Credits](#credits)
+- [License](#license)
+- [How to Contribute](#how-to-contribute)
+- [Tests](#tests)
+- [Questions](#questions)
 
-# Credits
-JD Tadlock: Acknowledged for invaluable assistance and guidance provided during the Rutgers coding bootcamp.
+---
 
-# License
-MIT: A succinct and flexible license permitting distribution of licensed works, modifications, and larger works under different terms, while mandating preservation of copyright and license notices. The LICENSE file in the repository provides further details.
+## Overview
 
-# How to Contribute
-Refer to the Contributor Covenant for guidelines on contributing.
+This backend application serves as a tool for managing e-commerce data, allowing users to:
 
-# Tests
-No specific tests are provided.
+- View, add, update, and delete products.
+- Manage categories and tags with full CRUD functionality.
+- Utilize Insomnia for constructing and testing HTTP requests.
 
-# Questions
-For inquiries, please visit my GitHub profile
+---
+
+## Usage
+
+To get started, follow these steps:
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/jv0321/E-Commerce_Back-End.git
+
+## Navigate to the project directory:
+```bash
+Copy code
+cd E-Commerce_Back-End
+
+
+## Install dependencies:
+```bash
+Copy code
+npm install
+
+
+Set up the environment variables:
+## Create a .env file in the root directory and add your PostgreSQL credentials:
+makefile
+Copy code
+DB_NAME=your_database_name
+DB_USER=your_username
+DB_PASSWORD=your_password
+
+
+Initialize the database:
+## Access PostgreSQL through your terminal and execute the schema file:
+```bash
+Copy code
+\i ./db/schema.sql
+
+
+Exit PostgreSQL once done.
+## Seed the database:
+```bash
+Copy code
+npm run seed
+
+
+## Start the application:
+```bash
+Copy code
+npm run dev
+
+
+Use Insomnia or a similar API client to test HTTP requests for managing products, categories, and tags:
+Use the provided Body tab in Insomnia and select "JSON" to send data.
+
+## Usage
+JD Tadlock: For guidance and support during the Rutgers coding bootcamp.
